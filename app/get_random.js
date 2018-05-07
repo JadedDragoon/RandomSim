@@ -15,8 +15,8 @@ import randNum from 'random-number-csprng';
  * @param {number} fieldDesc.wins Number of unique winning results (outcomes
  * that will win)
  * 
- * @returns {Promise.number[]} Returns an array of numbers representing the winning
- * results in the field}
+ * @returns {Promise.number[]} Returns an array of numbers representing the
+ * winning results in the field.
  */
 export function getField({size = 1024, wins = 1} = {}) {
     const arrOut = [];
@@ -32,21 +32,32 @@ export function getField({size = 1024, wins = 1} = {}) {
  * 
  * @param {Object} resultDesc {max = 1024}
  * @param {number} resultDesc.max The maximum value that can be returned
- * @param {Promise.number[]} resultDesc.field A field array to compair the random
- * result against.
+ * @param {Promise.number[]} resultDesc.field A field array to compair the
+ * random result against.
  * 
  * @returns {RResult} A random result object describing the criterea and
  * results of a single test.
  */
 export function getResult({max = 1024, field} = {}) {
-    
+    const result = randNum(1,max);
+    const outcome = result.then((resData) => {
+        return field.then((fieldData) => {
+            return _.includes(fieldData, resData);
+        });
+    });
+
+    return Promise.all([
+        outcome,
+        field,
+        result
+    ]);
 }
 
 /**
  * @typedef {Promise.Array} RResult
  * @prop {boolean} outcome Whether the random result was a success or failure.
  * @prop {Promise.number[]} field A record of the field of winning results. 
- * @prop {number} result A record of the random result that was compaired
- * against [field]{@link RResult.field}.
+ * @prop {Promise.number} result A record of the random result that was
+ * compaired against [field]{@link RResult.field}.
  * @global
  */
