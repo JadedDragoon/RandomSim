@@ -3,8 +3,8 @@ module.export = {
         "node",
     ],
     "extends": [
+        "google",
         "plugin:node/recommended",
-        "plugin:lodash/recommended",
-        "google"
+        "plugin:lodash/recommended"
     ]
 };

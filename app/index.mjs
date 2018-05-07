@@ -1,6 +1,6 @@
 import _ from "lodash-es";
-import getField from "./get_random";
-import getResult from "./get_random";
+import getField from "./get_random.mjs";
+import getResult from "./get_random.mjs";
 
 const fieldSize = process.argv[2];
 const winResults = process.argv[3];
