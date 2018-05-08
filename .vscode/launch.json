@@ -9,11 +9,6 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}\\index.mjs",
-            "args": [
-                "1024",
-                "1",
-                "1"
-            ],
             "runtimeArgs": [
                 "--experimental-modules"
             ]
