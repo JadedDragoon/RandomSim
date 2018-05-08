@@ -9,6 +9,12 @@ const chunkSize     = _.toInteger(process.argv[5]) || 100;
 const numChunks     = (reqIterations / chunkSize);
 const startTime     = moment();
 
+if (winResults > fieldSize) {
+    throw new TypeError('The number of win results ('+winResults+') must be less than field size ('+fieldSize+').')
+}
+if (numChunks >= 1 && _.isInteger(numChunks)) {
+    throw new TypeError('The chunk size ('+chunkSize+') must be less than total iterations ('+reqIterations+').')
+}
 
 (async function () {
     const countable = [];
