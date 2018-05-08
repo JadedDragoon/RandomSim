@@ -6,9 +6,30 @@
     "configurations": [
         {
             "type": "node",
+            "request": "attach",
+            "name": "63048",
+            "processId": "${command:PickProcess}"
+        },
+        {
+            "type": "node",
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}\\index.mjs",
+            "runtimeArgs": [
+                "--experimental-modules"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program - Long Run",
+            "program": "${workspaceFolder}\\index.mjs",
+            "args": [
+                "1024",
+                "1",
+                "100000000000",
+                "1000000"
+            ],
             "runtimeArgs": [
                 "--experimental-modules"
             ]

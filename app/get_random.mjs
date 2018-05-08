@@ -23,7 +23,7 @@ export function getField({size = 1024, wins = 1} = {}) {
     while (arrOut.length < wins) {
         arrOut.push(randNum(1,size));
     }
-    return Promise.all(arrOut);
+    return _slice(Promise.all(arrOut));
 }
 
 /**
@@ -46,11 +46,11 @@ export function getResult({max = 1024, field} = {}) {
         });
     });
 
-    return Promise.all([
+    return _.slice(Promise.all([
         outcome,
         field,
         result
-    ]);
+    ]));
 }
 
 /**

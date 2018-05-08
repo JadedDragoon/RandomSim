@@ -1,14 +1,13 @@
 import _ from "lodash";
-//import perf from "perf_hooks";
+import moment from "moment";
 import { getField, getResult } from "./get_random.mjs";
 
-debugger;
 const fieldSize     = _.toInteger(process.argv[2]) || 1024;
 const winResults    = _.toInteger(process.argv[3]) || 1;
 const reqIterations = _.toInteger(process.argv[4]) || 1000;
 const chunkSize     = _.toInteger(process.argv[5]) || 100;
 const numChunks     = (reqIterations / chunkSize);
-const startTime     = new Date();
+const startTime     = moment();
 
 (async function () {
     const countable = [];
@@ -20,8 +19,7 @@ const startTime     = new Date();
             " of " +
             numChunks +
             " - " +
-            ((new Date() - startTime) / 1000) +
-            " seconds"
+            moment(startTime).fromNow(true)
         );
         let resultArr = [];
 
@@ -30,16 +28,19 @@ const startTime     = new Date();
                 max:   fieldSize,
                 field: getField(fieldSize, winResults)
             })
-            resultArr.push(resultChunk);
+            resultArr.push(_.slice(resultChunk));
         }
         
-        countable.push(Promise.all(resultArr));
+        countable.push(_.slice(Promise.all(resultArr)));
     }
 
     return Promise.all(countable)
         .then((data) => {
             return _.filter(_.flatten(data), (val) => { return val[0]; });
         }).then((data) => {
-            console.log(_.size(data));
+            console.log(
+                'Expected: ~' + ((reqIterations * winResults) / fieldSize) + "\n" +
+                'Recieved: ' + _.size(data)
+            );
         });
 })();
