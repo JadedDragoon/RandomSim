@@ -12,8 +12,8 @@ const startTime     = moment();
 if (winResults > fieldSize) {
     throw new TypeError('The number of win results ('+winResults+') must be less than field size ('+fieldSize+').')
 }
-if (numChunks >= 1 && _.isInteger(numChunks)) {
-    throw new TypeError('The chunk size ('+chunkSize+') must be less than total iterations ('+reqIterations+').')
+if (_.isInteger(numChunks)) {
+    throw new TypeError('The chunk size ('+chunkSize+') must be a divisor of total iterations ('+reqIterations+').')
 }
 
 (async function () {
