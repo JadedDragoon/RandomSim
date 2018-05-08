@@ -9,17 +9,19 @@ const chunkSize     = _.toInteger(process.argv[5]) || 100;
 const numChunks     = (reqIterations / chunkSize);
 const startTime     = moment();
 
+if (numChunks >= 1 && _.isInteger(numChunks)) {
 (async function () {
     const countable = [];
 
     for (let i = numChunks; i > 0; i--) {
+        let now = moment();
         console.log(
             "Processing Chunk: " +
             (numChunks+1 - i) +
             " of " +
             numChunks +
             " - " +
-            moment(startTime).fromNow(true)
+            moment.utc(now.diff(startTime)).format("HH:mm:ss")
         );
         let resultArr = [];
 
