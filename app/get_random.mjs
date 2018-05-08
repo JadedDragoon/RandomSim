@@ -1,4 +1,5 @@
-import _ from 'lodash-es';
+import _ from 'lodash';
+import Promise from "bluebird";
 import randNum from 'random-number-csprng';
 /**
  * @module 'Get Random'
