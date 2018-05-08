@@ -9,9 +9,15 @@ const chunkSize     = _.toInteger(process.argv[5]) || 100;
 const numChunks     = (reqIterations / chunkSize);
 const startTime     = moment();
 
-if (numChunks >= 1 && _.isInteger(numChunks)) {
+
 (async function () {
     const countable = [];
+    console.log(
+        '\n' +
+        '===============================================================================\n' +
+        '|                                Processing...                                |\n' +
+        '===============================================================================\n'
+    );
 
     for (let i = numChunks; i > 0; i--) {
         let now = moment();
@@ -38,13 +44,24 @@ if (numChunks >= 1 && _.isInteger(numChunks)) {
 
     return Promise.all(countable)
         .then((data) => {
-            return _.filter(_.flatten(data), (val) => { return val[0]; });
+            return {
+                winners: _.filter(_.flatten(data), (val) => { return val[0]; }),
+                raw: data
+            };
         }).then((data) => {
             console.log(
+                '\n' +
+                '===============================================================================\n' +
+                '|                            Statistics & Results                             |\n' +
+                '===============================================================================\n' +
                 'Iterations:     ' + reqIterations + "\n" +
                 'Chance Each:    ' + winResults + '/' + fieldSize + "\n" +
                 'Expected Wins: ~' + ((reqIterations * winResults) / fieldSize) + "\n" +
-                'Actual Wins:    ' + _.size(data) + "\n"
+                'Actual Wins:    ' + _.size(data.winners) + "\n\n" +
+                '===============================================================================\n' +
+                '|                           RAW Simulation Results                            |\n' +
+                '===============================================================================\n' +
+                JSON.stringify(data.raw) + "\n\n"
             );
         });
 })();
