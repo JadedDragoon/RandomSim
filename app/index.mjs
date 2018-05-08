@@ -4,7 +4,7 @@ import { getField, getResult } from "./get_random.mjs";
 
 const fieldSize     = _.toInteger(process.argv[2]) || 1024;
 const winResults    = _.toInteger(process.argv[3]) || 1;
-const reqIterations = _.toInteger(process.argv[4]) || 1000;
+const reqIterations = _.toInteger(process.argv[4]) || 100000;
 const chunkSize     = _.toInteger(process.argv[5]) || 100;
 const numChunks     = (reqIterations / chunkSize);
 const startTime     = moment();
@@ -31,7 +31,7 @@ const startTime     = moment();
             resultArr.push(_.slice(resultChunk));
         }
         
-        countable.push(_.slice(Promise.all(resultArr)));
+        countable.push(_.slice(Promise.all(_.slice(resultArr))));
     }
 
     return Promise.all(countable)
@@ -39,8 +39,10 @@ const startTime     = moment();
             return _.filter(_.flatten(data), (val) => { return val[0]; });
         }).then((data) => {
             console.log(
-                'Expected: ~' + ((reqIterations * winResults) / fieldSize) + "\n" +
-                'Recieved: ' + _.size(data)
+                'Iterations:     ' + reqIterations + "\n" +
+                'Chance Each:    ' + winResults + '/' + fieldSize + "\n" +
+                'Expected Wins: ~' + ((reqIterations * winResults) / fieldSize) + "\n" +
+                'Actual Wins:    ' + _.size(data) + "\n"
             );
         });
 })();
