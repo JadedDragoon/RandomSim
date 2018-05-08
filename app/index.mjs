@@ -7,13 +7,22 @@ const fieldSize     = _.toInteger(process.argv[2]) || 1024;
 const winResults    = _.toInteger(process.argv[3]) || 1;
 const reqIterations = _.toInteger(process.argv[4]) || 1000;
 const chunkSize     = _.toInteger(process.argv[5]) || 100;
+const numChunks     = (reqIterations / chunkSize);
 const startTime     = new Date();
 
 (async function () {
     const countable = [];
 
-    for (let i = (reqIterations / chunkSize); i > 0; i--) {
-        console.log("Processing Chunk: " + ((reqIterations / chunkSize) - i + 1) + " of " + (reqIterations / chunkSize) + " - " + ((new Date() - startTime) / 1000) + " seconds");
+    for (let i = numChunks; i > 0; i--) {
+        console.log(
+            "Processing Chunk: " +
+            (numChunks+1 - i) +
+            " of " +
+            numChunks +
+            " - " +
+            ((new Date() - startTime) / 1000) +
+            " seconds"
+        );
         let resultArr = [];
 
         for (let i = chunkSize; i > 0; i--) {
