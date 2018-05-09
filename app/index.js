@@ -81,7 +81,7 @@ if (!_.isInteger(numChunks)) {
         // remove extra comma from prepaired statement
         sql = _.trimEnd(sql, ',');
 
-        // execute prepaired statment
+        // execute prepaired insert statment
         db.run(sql);
     }
 
