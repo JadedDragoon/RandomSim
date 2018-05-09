@@ -1,2 +1,2 @@
 @echo off
-%cd%\node.exe %cd%\index.mjs %1 %2 %3 %4
+"%~dp0\node.exe" "%~dp0\index.js" %1 %2 %3 %4
