@@ -54,8 +54,11 @@ if (!_.isInteger(numChunks)) {
         }
 
         console.log(
-              '  ' + moment.utc(now.diff(startTime)).format('HH:mm:ss')
-            + ' of ' + ((!_.isUndefined(times[0])) ? (moment.utc(_.mean(_.slice(times, times.length-21)) * numChunks).format('HH:mm:ss')) : 'Calculating...')
+              '  ' + (
+                    (!_.isUndefined(times[0]))
+                    ? (moment.utc(now.diff(startTime) - (_.mean(_.slice(times, times.length-21)) * numChunks)).format('HH:mm:ss'))
+                    : 'Calculating...'
+                )
             + ' - Processing Chunk: ' + (ci)
             + ' of ' + numChunks
             + ' - ' + _.round(process.memoryUsage().heapTotal / 1024 / 1024, 0) + ':' + _.round(process.memoryUsage().heapUsed / 1024 / 1024, 0)
