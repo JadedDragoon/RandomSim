@@ -22,7 +22,7 @@ if (!_.isInteger(numChunks)) {
 // async closure, to aid in handling async functions in a synchronous manner (to control memory usage)
 (async function () {
 
-    // create database
+    // create new, empty database
     const db = await sqlite.open('./database.sqlite', { Promise });
     await db.run('DROP TABLE IF EXISTS main');
     await db.run('VACUUM');
