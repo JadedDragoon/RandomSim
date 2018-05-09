@@ -1,6 +1,8 @@
-import _ from "lodash";
-import moment from "moment";
-import { getField, getResult } from "./get_random.mjs";
+const _         = require('lodash');
+const moment    = require('moment');
+const getField  = require('./get_random.mjs').getField;
+const getResult = require('./get_random.mjs').getResult;
+//const heapdumpgen = require('./heapdumpgen').init('datadir');
 
 const fieldSize     = _.toInteger(process.argv[2]) || 1024;
 const winResults    = _.toInteger(process.argv[3]) || 1;

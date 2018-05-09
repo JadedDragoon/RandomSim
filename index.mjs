@@ -1,1 +1,1 @@
-import './app/index.mjs';
+require('./app/index.mjs');

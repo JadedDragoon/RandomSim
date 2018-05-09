@@ -1,8 +1,5 @@
-import _ from 'lodash';
-import randNum from 'random-number-csprng';
-/**
- * @module 'Get Random'
- */
+const _       = require('lodash');
+const randNum = require('random-number-csprng');
 
 /**
  * @description Generates a field of 'wins' randomly assigned winning integer
@@ -18,10 +15,10 @@ import randNum from 'random-number-csprng';
  * @returns {Promise.number[]} Returns an array of numbers representing the
  * winning results in the field.
  */
-export function getField({size = 1024, wins = 1} = {}) {
+function getField({size = 1024, wins = 1} = {}) {
     const arrOut = [];
     while (arrOut.length < wins) {
-        arrOut.push(randNum(1,size));
+        arrOut.push(randNum(1, size));
     }
     return Promise.all(_.slice(arrOut));
 }
@@ -38,11 +35,11 @@ export function getField({size = 1024, wins = 1} = {}) {
  * @returns {RResult} A random result object describing the criterea and
  * results of a single test.
  */
-export function getResult({max = 1024, field} = {}) {
-    const result = randNum(1,max);
+function getResult({max = 1024, field} = {}) {
+    const result = randNum(1, max);
     const outcome = result.then((resData) => {
         return field.then((fieldData) => {
-            return _.includes(fieldData, resData);
+            return _.includes(_.slice(fieldData), resData);
         });
     });
 
@@ -51,6 +48,14 @@ export function getResult({max = 1024, field} = {}) {
         field,
         result
     ]));
+}
+
+/**
+ * @module 'Get Random'
+ */
+module.exports = {
+    getField,
+    getResult
 }
 
 /**
