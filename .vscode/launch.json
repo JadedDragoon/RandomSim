@@ -14,10 +14,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\index.mjs",
-            "runtimeArgs": [
-                "--experimental-modules"
-            ]
+            "program": "${workspaceFolder}\\index.mjs"
         },
         {
             "type": "node",
@@ -29,9 +26,6 @@
                 "1",
                 "100000000000",
                 "1000000"
-            ],
-            "runtimeArgs": [
-                "--experimental-modules"
             ]
         }
     ]

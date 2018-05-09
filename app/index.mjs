@@ -45,22 +45,22 @@ if (!_.isInteger(numChunks)) {
             resultArr.push(_.slice(resultChunk));
         }
         
-        countable.push(_.slice(resultArr));
+        //countable.push(_.slice(resultArr));
     }
 
-            console.log(
-                '\n' +
-                '===============================================================================\n' +
+    console.log(
+        '\n' +
+        '===============================================================================\n' +
         '|                           RAW Simulation Results                            |\n' +
-                '===============================================================================\n' +
+        '===============================================================================\n' +
         JSON.stringify(countable) + "\n\n" + 
-                '===============================================================================\n' +
+        '===============================================================================\n' +
         '|                            Statistics & Results                             |\n' +
-                '===============================================================================\n' +
+        '===============================================================================\n' +
         '  Iterations:        ' + reqIterations + "\n" +
         //'  Actual Iterations: ' + _.size(_.flatten(countable)) + "\n" + //memory intensive and unnecisary, debugging only
         '  Chance Each:       ' + winResults + '/' + fieldSize + "\n" +
         '  Expected Wins:    ~' + ((reqIterations * winResults) / fieldSize) + "\n" +
         '  Actual Wins:       ' + _.size(_.filter(_.flatten(countable), (val) => { return val[0]; })) + "\n\n"        
-            );
+    );
 })();
