@@ -1,2 +1,2 @@
 @echo off
-%cd%\node.exe --experimental-modules %cd%\index.mjs %1 %2 %3 %4
+%cd%\node.exe %cd%\index.mjs %1 %2 %3 %4
