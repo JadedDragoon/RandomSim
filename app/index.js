@@ -53,7 +53,6 @@ if (!_.isInteger(numChunks)) {
             );
         }
 
-        //debugger;
         console.log(
               '  ' + moment.utc(now.diff(startTime)).format('HH:mm:ss')
             + ' of ' + ((!_.isUndefined(times[0])) ? (moment.utc(_.mean(_.slice(times, times.length-21)) * numChunks).format('HH:mm:ss')) : 'Calculating...')
