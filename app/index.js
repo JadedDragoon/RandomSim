@@ -3,7 +3,6 @@ const moment    = require('moment');
 const sqlite    = require('sqlite');
 const getField  = require('./get_random.js').getField;
 const getResult = require('./get_random.js').getResult;
-//const heapdumpgen = require('./heapdumpgen').init('datadir');
 
 const fieldSize     = _.toSafeInteger(process.argv[2]) || 1024;
 const winResults    = _.toSafeInteger(process.argv[3]) || 1;
