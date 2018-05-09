@@ -14,7 +14,7 @@ const startTime     = moment();
 if (winResults > fieldSize) {
     throw new TypeError('The number of win results ('+winResults+') must be less than field size ('+fieldSize+').')
 }
-if (_.isInteger(numChunks)) {
+if (!_.isInteger(numChunks)) {
     throw new TypeError('The chunk size ('+chunkSize+') must be a divisor of total iterations ('+reqIterations+').')
 }
 
@@ -30,12 +30,10 @@ if (_.isInteger(numChunks)) {
     for (let i = numChunks; i > 0; i--) {
         let now = moment();
         console.log(
-            "Processing Chunk: " +
-            (numChunks+1 - i) +
-            " of " +
-            numChunks +
-            " - " +
-            moment.utc(now.diff(startTime)).format("HH:mm:ss")
+            "  " + moment.utc(now.diff(startTime)).format("HH:mm:ss") +
+            " - Processing Chunk: " + (numChunks+1 - i) +
+            " of " + numChunks +
+            " - " + _.round(process.memoryUsage().heapTotal / 1024 / 1024, 0) + ":" + _.round(process.memoryUsage().heapUsed / 1024 / 1024, 0)
         );
         let resultArr = [];
 
@@ -47,29 +45,22 @@ if (_.isInteger(numChunks)) {
             resultArr.push(_.slice(resultChunk));
         }
         
-        countable.push(_.slice(Promise.all(_.slice(resultArr))));
+        countable.push(_.slice(resultArr));
     }
 
-    return Promise.all(countable)
-        .then((data) => {
-            return {
-                winners: _.filter(_.flatten(data), (val) => { return val[0]; }),
-                raw: data
-            };
-        }).then((data) => {
             console.log(
                 '\n' +
                 '===============================================================================\n' +
-                '|                            Statistics & Results                             |\n' +
+        '|                           RAW Simulation Results                            |\n' +
                 '===============================================================================\n' +
-                'Iterations:     ' + reqIterations + "\n" +
-                'Chance Each:    ' + winResults + '/' + fieldSize + "\n" +
-                'Expected Wins: ~' + ((reqIterations * winResults) / fieldSize) + "\n" +
-                'Actual Wins:    ' + _.size(data.winners) + "\n\n" +
+        JSON.stringify(countable) + "\n\n" + 
                 '===============================================================================\n' +
-                '|                           RAW Simulation Results                            |\n' +
+        '|                            Statistics & Results                             |\n' +
                 '===============================================================================\n' +
-                JSON.stringify(data.raw) + "\n\n"
+        '  Iterations:        ' + reqIterations + "\n" +
+        //'  Actual Iterations: ' + _.size(_.flatten(countable)) + "\n" + //memory intensive and unnecisary, debugging only
+        '  Chance Each:       ' + winResults + '/' + fieldSize + "\n" +
+        '  Expected Wins:    ~' + ((reqIterations * winResults) / fieldSize) + "\n" +
+        '  Actual Wins:       ' + _.size(_.filter(_.flatten(countable), (val) => { return val[0]; })) + "\n\n"        
             );
-        });
 })();
