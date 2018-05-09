@@ -1,6 +1,6 @@
 {
   "name": "randomsim",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simulate and gather statistics on specific random constraints.",
   "main": "index.js",
   "scripts": {
