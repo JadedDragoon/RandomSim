@@ -36,19 +36,19 @@ if (!_.isInteger(numChunks)) {
     );
 
     // chunk loop, each chunk is a new itteration of this loop
-    for (let i = numChunks; i > 0; i--) {
+    for (let ci = 1; ci <= numChunks; ci++) {
         let now = moment();
         let sql = 'INSERT INTO main (outcome, field, result) VALUES';
 
         console.log(
               '  ' + moment.utc(now.diff(startTime)).format('HH:mm:ss')
-            + ' - Processing Chunk: ' + (numChunks+1 - i)
+            + ' - Processing Chunk: ' + (ci)
             + ' of ' + numChunks
             + ' - ' + _.round(process.memoryUsage().heapTotal / 1024 / 1024, 0) + ':' + _.round(process.memoryUsage().heapUsed / 1024 / 1024, 0)
         );
         
         // sim loop, each simulation is a new itteration of this loop
-        for (let i = chunkSize; i > 0; i--) {
+        for (let si = 1; si <= chunkSize; si++) {
             let result = await getResult({
                 max:   fieldSize,
                 field: getField(fieldSize, winResults)
