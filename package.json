@@ -21,8 +21,6 @@
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-lodash": "^2.7.0",
-    "eslint-plugin-node": "^6.0.1",
-    "gc-profiler": "^1.4.0",
-    "v8-profiler": "^5.7.0"
+    "eslint-plugin-node": "^6.0.1"
   }
 }
