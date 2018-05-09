@@ -55,7 +55,7 @@ if (!_.isInteger(numChunks)) {
         console.log(
               '  ' + (
                     (!_.isUndefined(times[0]))
-                    ? moment.utc(_.mean(_.slice(times, times.length-21)) * (numChunks - ci)).format('HH:mm:ss')
+                    ? moment.utc(_.mean(_.slice(times, times.length-21)) * (numChunks - ci + 1)).format('HH:mm:ss')
                     : 'Calculating...'
                 )
             + ' - Processing Chunk: ' + (ci)
