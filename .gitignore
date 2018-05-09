@@ -63,3 +63,7 @@ typings/
 # custom
 database.sqlite
 .vscode/settings.json
+node_perfctr_provider.man
+node_etw_provider.man
+LICENSE-RandomSim
+CHANGELOG.md
