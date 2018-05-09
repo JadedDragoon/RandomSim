@@ -36,12 +36,27 @@ if (!_.isInteger(numChunks)) {
     );
 
     // chunk loop, each chunk is a new itteration of this loop
+    const times = [];
     for (let ci = 1; ci <= numChunks; ci++) {
         let now = moment();
         let sql = 'INSERT INTO main (outcome, field, result) VALUES';
+        
+        // record time taken for previous chunk loop
+        if (!_.isUndefined(times[0])) {
+            times.push(
+                now.diff(startTime)
+                - _.sum(times)
+            );
+        } else if (!now.isSame(startTime, 'second')) {
+            times.push(
+                now.diff(startTime)
+            );
+        }
 
+        //debugger;
         console.log(
               '  ' + moment.utc(now.diff(startTime)).format('HH:mm:ss')
+            + ' of ' + ((!_.isUndefined(times[0])) ? (moment.utc(_.mean(_.slice(times, times.length-21)) * numChunks).format('HH:mm:ss')) : 'Calculating...')
             + ' - Processing Chunk: ' + (ci)
             + ' of ' + numChunks
             + ' - ' + _.round(process.memoryUsage().heapTotal / 1024 / 1024, 0) + ':' + _.round(process.memoryUsage().heapUsed / 1024 / 1024, 0)
