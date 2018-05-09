@@ -62,3 +62,4 @@ typings/
 
 # custom
 database.sqlite
+.vscode/settings.json
