@@ -14,18 +14,18 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\index.mjs"
+            "program": "${workspaceFolder}\\index.js"
         },
         {
             "type": "node",
             "request": "launch",
             "name": "Launch Program - Long Run",
-            "program": "${workspaceFolder}\\index.mjs",
+            "program": "${workspaceFolder}\\index.js",
             "args": [
                 "1024",
                 "1",
-                "100000000000",
-                "1000000"
+                "102400000000",
+                "1024000"
             ]
         }
     ]

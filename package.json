@@ -1,8 +1,8 @@
 {
-  "name": "randomtest",
+  "name": "randomsim",
   "version": "0.0.1",
-  "description": "Test and gather statistics on specific random constraints.",
-  "main": "index.mjs",
+  "description": "Simulate and gather statistics on specific random constraints.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,6 @@
   "author": "J Cliff Armstrong",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.1",
     "moment": "^2.22.1",
     "random-number-csprng": "^1.0.2",
     "sqlite": "^2.9.1"
