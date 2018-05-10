@@ -72,7 +72,7 @@ if (!_.isInteger(numChunks)) {
         for (let si = 1; si <= chunkSize; si++) {
             let result = await getResult({
                 max:   fieldSize,
-                field: getField(fieldSize, winResults)
+                field: getField({size: fieldSize, wins: winResults})
             })
             
             // append results to prepaired sql statement
