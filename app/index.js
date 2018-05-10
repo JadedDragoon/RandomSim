@@ -23,7 +23,7 @@ if (!_.isInteger(numChunks)) {
 
     console.log(
         '\n' +
-        'Cleaning up past results. Please wait...\n'
+        'Creating clean database. Please wait...\n'
     )
 
     // create new, empty database
