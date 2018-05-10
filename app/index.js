@@ -5,7 +5,7 @@ const getField  = require('./get_random.js').getField;
 const getResult = require('./get_random.js').getResult;
 
 const fieldSize     = _.toSafeInteger(process.argv[2]) || 1024;
-const winResults    = _.toSafeInteger(process.argv[3]) || 1;
+const winResults    = _.toSafeInteger(process.argv[3]) || 16;
 const reqIterations = _.toSafeInteger(process.argv[4]) || 102400;
 const chunkSize     = _.toSafeInteger(process.argv[5]) || 1024;
 const numChunks     = (reqIterations / chunkSize);
