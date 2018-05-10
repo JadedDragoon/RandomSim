@@ -89,8 +89,7 @@ if (!_.isInteger(numChunks)) {
         db.run(sql);
     }
 
-    // store results
-    const actIter    = await db.get('SELECT Count(*) FROM main').then((data) => { return data['Count(*)']; }); // resource intensive and unnecisary, debugging only
+    // get results from DB
     const actWins    = await db.get('SELECT Count(*) FROM main WHERE outcome = "true"').then((data) => { return data['Count(*)']; });
     const rawResults = await db.all('SELECT outcome, field, result FROM main').then((data) => {
         // convert to back into array with correct datatypes
