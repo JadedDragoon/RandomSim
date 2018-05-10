@@ -21,6 +21,11 @@ if (!_.isInteger(numChunks)) {
 // async closure, to aid in handling async functions in a synchronous manner (to control memory usage)
 (async () => {
 
+    console.log(
+        '\n' +
+        'Cleaning up past results. Please wait...\n\n'
+    )
+
     // create new, empty database
     const db = await sqlite.open('./database.sqlite', { Promise });
     await db.run('DROP TABLE IF EXISTS main');
@@ -55,8 +60,8 @@ if (!_.isInteger(numChunks)) {
         console.log(
               '  ' + (
                     (!_.isUndefined(times[0]))
-                    ? moment.utc(_.mean(_.slice(times, times.length-21)) * (numChunks - ci + 1)).format('HH:mm:ss')
-                    : 'Calculating...'
+                    ? moment.utc(_.mean(_.slice(times, times.length-21)) * (numChunks - ci)).format('HH:mm:ss')
+                    : 'Calc....'
                 )
             + ' - Processing Chunk: ' + (ci)
             + ' of ' + numChunks
