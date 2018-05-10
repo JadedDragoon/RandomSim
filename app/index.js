@@ -91,26 +91,27 @@ if (!_.isInteger(numChunks)) {
 
     // get results from DB
     const actWins    = await db.get('SELECT Count(*) FROM main WHERE outcome = "true"').then((data) => { return data['Count(*)']; });
-    const rawResults = await db.all('SELECT outcome, field, result FROM main').then((data) => {
+    //const actIter    = await db.get('SELECT Count(*) FROM main').then((data) => { return data['Count(*)']; }); // resource intensive and unnecisary, debugging only
+    /*const rawResults = await db.all('SELECT outcome, field, result FROM main').then((data) => {
         // convert to back into array with correct datatypes
         return _.map(data, (obj) => { return [
             (obj.outcome === 'true'),
             _.map(_.split(obj.field, ','), _.toInteger),
             _.toSafeInteger(obj.result)
         ]});
-    });
+    });*/
 
     console.log(
         '\n' +
-        '===============================================================================\n' +
+        /*'===============================================================================\n' +
         '|                           RAW Simulation Results                            |\n' +
         '===============================================================================\n\n' +
-        JSON.stringify(rawResults) + '\n\n' +
+        JSON.stringify(rawResults) + '\n\n' +*/
         '===============================================================================\n' +
         '|                            Statistics & Results                             |\n' +
         '===============================================================================\n\n' +
         '  Requested Iterations: ' + reqIterations + '\n' +
-        '  Actual Iterations:    ' + ((!_.isUndefined(actIter)) ? actIter : 'Disabled: Debug Only') + '\n' +
+        //'  Actual Iterations:    ' + ((!_.isUndefined(actIter)) ? actIter : 'Disabled: Debug Only') + '\n' +
         '  Chance Per Iteration: ' + winResults + '-in-' + fieldSize + '\n' +
         '  Expected Wins:       ~' + ((reqIterations * winResults) / fieldSize) + '\n' +
         '  Actual Wins:          ' + actWins + '\n\n'
