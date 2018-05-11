@@ -33,6 +33,16 @@ if (!_.isInteger(numChunks)) {
     await db.run('CREATE TABLE main (outcome BOOLEAN, field TEXT, result INTEGER)');
 
     console.log(
+        '===============================================================================\n' +
+        '|                                Configuration                                |\n' +
+        '===============================================================================\n\n' +
+        '  Requested Iterations: ' + reqIterations + '\n' +
+        '  Chunk Size:           ' + chunkSize + " x " + numChunks + '\n' +
+        '  Chance Per Iteration: ' + winResults + '-in-' + fieldSize + '\n' +
+        '  Expected Wins:       ~' + ((reqIterations * winResults) / fieldSize) + '\n'
+    );
+
+    console.log(
         '\n' +
         '===============================================================================\n' +
         '|                                Processing...                                |\n' +
