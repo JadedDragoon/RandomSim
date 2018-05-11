@@ -4,18 +4,18 @@ const sqlite    = require('sqlite');
 const getField  = require('./get_random.js').getField;
 const getResult = require('./get_random.js').getResult;
 
-const fieldSize     = _.toSafeInteger(process.argv[2]) || 1024;
-const winResults    = _.toSafeInteger(process.argv[3]) || 16;
-const reqIterations = _.toSafeInteger(process.argv[4]) || 102400;
-const chunkSize     = _.toSafeInteger(process.argv[5]) || 1024;
-const numChunks     = (reqIterations / chunkSize);
-const startTime     = moment();
+const fieldSize  = _.toSafeInteger(process.argv[2]) || 1024;
+const winCount   = _.toSafeInteger(process.argv[3]) || 16;
+const iterations = _.toSafeInteger(process.argv[4]) || 102400;
+const chunkSize  = _.toSafeInteger(process.argv[5]) || 1024;
+const numChunks  = (iterations / chunkSize);
+const startTime  = moment();
 
-if (winResults > fieldSize) {
-    throw new TypeError('The number of win results ('+winResults+') must be less than field size ('+fieldSize+').')
+if (winCount > fieldSize) {
+    throw new TypeError('The number of win results ('+winCount+') must be less than field size ('+fieldSize+').')
 }
 if (!_.isInteger(numChunks)) {
-    throw new TypeError('The chunk size ('+chunkSize+') must be a divisor of total iterations ('+reqIterations+').')
+    throw new TypeError('The chunk size ('+chunkSize+') must be a divisor of total iterations ('+iterations+').')
 }
 
 // async closure, to aid in handling async functions in a synchronous manner (to control memory usage)
@@ -36,10 +36,10 @@ if (!_.isInteger(numChunks)) {
         '===============================================================================\n' +
         '|                                Configuration                                |\n' +
         '===============================================================================\n\n' +
-        '  Requested Iterations: ' + reqIterations + '\n' +
+        '  Requested Iterations: ' + iterations + '\n' +
         '  Chunk Size:           ' + chunkSize + " x" + numChunks + '\n' +
-        '  Chance Per Iteration: ' + winResults + '-in-' + fieldSize + '\n' +
-        '  Expected Wins:       ~' + ((reqIterations * winResults) / fieldSize) + '\n'
+        '  Chance Per Iteration: ' + winCount + '-in-' + fieldSize + '\n' +
+        '  Expected Wins:       ~' + ((iterations * winCount) / fieldSize) + '\n'
     );
 
     console.log(
@@ -82,7 +82,7 @@ if (!_.isInteger(numChunks)) {
         for (let si = 1; si <= chunkSize; si++) {
             let result = await getResult({
                 max:   fieldSize,
-                field: getField({size: fieldSize, wins: winResults})
+                field: getField({size: fieldSize, wins: winCount})
             })
             
             // append results to prepaired sql statement
@@ -120,10 +120,10 @@ if (!_.isInteger(numChunks)) {
         '===============================================================================\n' +
         '|                            Statistics & Results                             |\n' +
         '===============================================================================\n\n' +
-        '  Requested Iterations: ' + reqIterations + '\n' +
+        '  Requested Iterations: ' + iterations + '\n' +
         //'  Actual Iterations:    ' + ((!_.isUndefined(actIter)) ? actIter : 'Disabled: Debug Only') + '\n' +
-        '  Chance Per Iteration: ' + winResults + '-in-' + fieldSize + '\n' +
-        '  Expected Wins:       ~' + ((reqIterations * winResults) / fieldSize) + '\n' +
+        '  Chance Per Iteration: ' + winCount + '-in-' + fieldSize + '\n' +
+        '  Expected Wins:       ~' + ((iterations * winCount) / fieldSize) + '\n' +
         '  Actual Wins:          ' + actWins + '\n\n'
     );
 })();
