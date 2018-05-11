@@ -20,7 +20,29 @@ function getField({size = 1024, wins = 1} = {}) {
     while (arrOut.length < wins) {
         arrOut.push(randNum(1, size));
     }
-    return Promise.all(_.slice(arrOut));
+    return Promise.all(_.slice(arrOut))
+        .then((dataArr) => {
+            
+            // gather statistic on random numbers produced
+            dataArr = _.sortBy(dataArr);
+            let counts = _.countBy(dataArr);
+            let unused = [];
+            for (i = 1; i <= size; i++) { if (!_.includes(dataArr, i)) unused.push(i); }
+
+            // map all duplicate random numbers to unused numbers between 1 and size
+            return _.map(dataArr, (value) => {
+                let newVal;
+
+                if (counts[value] > 1) {
+                    counts[value]--;
+                    newVal = unused.shift();
+                } else {
+                    newVal = value;
+                }
+
+                return newVal;
+            });
+        });
 }
 
 /**
