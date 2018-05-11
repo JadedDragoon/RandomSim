@@ -37,7 +37,7 @@ if (!_.isInteger(numChunks)) {
         '|                                Configuration                                |\n' +
         '===============================================================================\n\n' +
         '  Requested Iterations: ' + reqIterations + '\n' +
-        '  Chunk Size:           ' + chunkSize + " x " + numChunks + '\n' +
+        '  Chunk Size:           ' + chunkSize + " x" + numChunks + '\n' +
         '  Chance Per Iteration: ' + winResults + '-in-' + fieldSize + '\n' +
         '  Expected Wins:       ~' + ((reqIterations * winResults) / fieldSize) + '\n'
     );
