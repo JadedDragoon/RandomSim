@@ -1,6 +1,7 @@
+'use strict';
 const _         = require('lodash');
 const moment    = require('moment');
-const sqlite    = require('sqlite');
+const sqlite    = require('better-sqlite3');
 const getField  = require('./get_random.js').getField;
 const getResult = require('./get_random.js').getResult;
 
@@ -27,10 +28,10 @@ if (!_.isInteger(numChunks)) {
     )
 
     // create new, empty database
-    const db = await sqlite.open('./database.sqlite', { Promise });
-    await db.run('DROP TABLE IF EXISTS main');
-    await db.run('VACUUM');
-    await db.run('CREATE TABLE main (outcome BOOLEAN, field TEXT, result INTEGER)');
+    const db = new sqlite('./database.sqlite');
+    db.prepare('DROP TABLE IF EXISTS main').run();
+    db.prepare('VACUUM').run();
+    db.prepare('CREATE TABLE main (outcome BOOLEAN, field TEXT, result INTEGER)').run();
 
     console.log(
         '===============================================================================\n' +
@@ -77,31 +78,33 @@ if (!_.isInteger(numChunks)) {
             + ' of ' + numChunks
             + ' - ' + _.round(process.memoryUsage().heapTotal / 1024 / 1024, 0) + ':' + _.round(process.memoryUsage().heapUsed / 1024 / 1024, 0)
         );
-        
+
+        let resultArr;
         // sim loop, each simulation is a new itteration of this loop
         for (let si = 1; si <= chunkSize; si++) {
             let result = await getResult({
                 max:   fieldSize,
                 field: getField({size: fieldSize, wins: winCount})
-            })
+            });
             
-            // append results to prepaired sql statement
-            sql += ' ("' +
-                _.toString(result[0]) + '", "' +
-                _.toString(result[1]) + '", "' +
-                _.toString(result[2]) + '"),';
+            sql +=
+                ' (' +
+                '"' + _.toString(result[0]) + '", ' +
+                '"' + _.join(    result[1]) + '", ' +
+                '"' + _.toString(result[2]) + '"'   +
+                '),';
         }
         
-        // remove extra comma from prepaired statement
+        // remove trailing comma from sql statement
         sql = _.trimEnd(sql, ',');
 
         // execute prepaired insert statment
-        db.run(sql);
+        db.prepare(sql).run();
     }
 
     // get results from DB
-    const actWins    = await db.get('SELECT Count(*) FROM main WHERE outcome = "true"').then((data) => { return data['Count(*)']; });
-    //const actIter    = await db.get('SELECT Count(*) FROM main').then((data) => { return data['Count(*)']; }); // resource intensive and unnecisary, debugging only
+    const actWins = db.prepare('SELECT Count(*) FROM main WHERE outcome = "true"').get()["Count(*)"];
+    const actIter = db.prepare('SELECT Count(*) FROM main').get()["Count(*)"]; // resource intensive and unnecisary, debugging only
     /*const rawResults = await db.all('SELECT outcome, field, result FROM main').then((data) => {
         // convert to back into array with correct datatypes
         return _.map(data, (obj) => { return [
@@ -111,6 +114,7 @@ if (!_.isInteger(numChunks)) {
         ]});
     });*/
 
+    debugger;
     console.log(
         '\n' +
         /*'===============================================================================\n' +
