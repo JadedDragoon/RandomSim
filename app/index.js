@@ -54,18 +54,7 @@ if (!_.isInteger(numChunks)) {
     const times = [];
     for (let ci = 1; ci <= numChunks; ci++) {
         let now = moment();
-
-        // prepare sql statement
-        db.register({deterministic: true}, function arr2sql(array) {
-            let sqlOut = '';
-            _.forEach(array, (valArr) => {
-                sqlOut += ' ("';
-                sqlOut += _.join(valArr, '", "');
-                sqlOut += '"),';
-            });
-            return  _.trimEnd(sqlOut, ',');
-        });
-        let sql = db.prepare('INSERT INTO main (outcome, field, result) VALUES arr2sql(?)');
+        let sql = 'INSERT INTO main (outcome, field, result) VALUES';
         
         // record time taken for previous chunk loop
         if (!_.isUndefined(times[0])) {
@@ -98,20 +87,24 @@ if (!_.isInteger(numChunks)) {
                 field: getField({size: fieldSize, wins: winCount})
             });
             
-            resultArr.push([
-                '"' + _.toString(result[0]) + '"',
-                '"' + _.join(    result[1]) + '"',
-                '"' + _.toString(result[2]) + '"'
-            ]);
+            sql +=
+                ' (' +
+                '"' + _.toString(result[0]) + '", ' +
+                '"' + _.join(    result[1]) + '", ' +
+                '"' + _.toString(result[2]) + '"'   +
+                '),';
         }
         
+        // remove trailing comma from sql statement
+        sql = _.trimEnd(sql, ',');
+
         // execute prepaired insert statment
-        sql.run(resultArr);
+        db.prepare(sql).run();
     }
 
     // get results from DB
-    const actWins = db.prepare('SELECT Count(*) FROM main WHERE outcome = "true"').get();
-    const actIter = db.prepare('SELECT Count(*) FROM main').get(); // resource intensive and unnecisary, debugging only
+    const actWins = db.prepare('SELECT Count(*) FROM main WHERE outcome = "true"').get()["Count(*)"];
+    const actIter = db.prepare('SELECT Count(*) FROM main').get()["Count(*)"]; // resource intensive and unnecisary, debugging only
     /*const rawResults = await db.all('SELECT outcome, field, result FROM main').then((data) => {
         // convert to back into array with correct datatypes
         return _.map(data, (obj) => { return [
