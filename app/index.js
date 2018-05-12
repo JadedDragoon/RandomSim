@@ -73,7 +73,7 @@ if (!_.isInteger(numChunks)) {
                     ? moment.utc(_.mean(times) * (numChunks - ci + 1)).format('HH:mm:ss')
                     : 'Calc....'
                 )
-            + ' - Processing Chunk: ' + (ci)
+            + ' - Simulating Chunk: ' + (ci)
             + ' of ' + numChunks
             + ' - ' + _.round(process.memoryUsage().heapTotal / 1024 / 1024, 0) + ':' + _.round(process.memoryUsage().heapUsed / 1024 / 1024, 0)
         );
@@ -100,6 +100,10 @@ if (!_.isInteger(numChunks)) {
         // execute prepaired insert statment
         db.prepare(sql).run();
     }
+
+    console.log(
+        '  Complete! Please wait while we read results from the database...'
+    );
 
     // get results from DB
     const actWins = db.prepare('SELECT Count(*) FROM main WHERE outcome = "true"').get()["Count(*)"];
