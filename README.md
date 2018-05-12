@@ -22,7 +22,7 @@ Usage (*nix): randsim.sh <field_size> <win_count> <iterations> <chunk_size>
   iterations    The total number of simulations that will be run.
                 [Default: 102400]
                 
-  chunk_size    The number of sumilations that will be run concurently before
+  chunk_size    The number of simulations that will be run concurently before
                 writing the result to disk. [Default: 1024]
 ```
 
