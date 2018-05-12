@@ -6,7 +6,7 @@ Node.js 8.11.1 or newer is required to run RandomSim. You may download it from t
 
 With node.js 8.11.1 or newer installed, download and extract [the latest release](https://github.com/JadedDragoon/RandomSim/releases) of RandomSim into it's own folder. Windows users should download the "zip" version.
 
-Then, at a command prompt/terminal, change to the folder you extracted RandomSim into and run `bash npm install -P`. This will download and install all required dependencies. On linux/bsd you will also have to `chmod +x randsim.sh` to make the start script executable.
+Then, at a command prompt/terminal, change to the folder you extracted RandomSim into and run `npm install -P`. This will download and install all required dependencies. On linux/bsd you will also have to `chmod +x randsim.sh` to make the start script executable.
 
 ## Usage:
 ```
