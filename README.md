@@ -2,7 +2,7 @@ A simple project to simulate random wins in a game over large numbers of iterati
 
 ## Installation:
 
-First, (download and extract)[https://github.com/JadedDragoon/RandomSim/releases] the latest release into it's own folder. Windows users should download the "zip" version.
+First, [download and extract](https://github.com/JadedDragoon/RandomSim/releases) the latest release into it's own folder. Windows users should download the "zip" version.
 
 Then change to the folder you extracted it into and run:
 ```bash
