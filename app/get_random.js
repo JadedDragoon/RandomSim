@@ -28,7 +28,7 @@ function getField({size = 1024, wins = 1} = {}) {
             dataArr = _.sortBy(dataArr);
             let counts = _.countBy(dataArr);
             let unused = [];
-            for (i = 1; i <= size; i++) { if (!_.includes(dataArr, i)) unused.push(i); }
+            for (let i = 1; i <= size; i++) { if (!_.includes(dataArr, i)) unused.push(i); }
 
             // map all duplicate random numbers to unused numbers between 1 and size
             return _.map(dataArr, (value) => {
