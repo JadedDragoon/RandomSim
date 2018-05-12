@@ -1,9 +1,8 @@
 'use strict';
-const _         = require('lodash');
-const moment    = require('moment');
-const sqlite    = require('better-sqlite3');
-const getField  = require('./get_random.js').getField;
-const getResult = require('./get_random.js').getResult;
+const _      = require('lodash');
+const moment = require('moment');
+const sqlite = require('better-sqlite3');
+const { getField, getResult } = require('./get_random.js');
 
 const fieldSize  = _.toSafeInteger(process.argv[2]) || 1024;
 const winCount   = _.toSafeInteger(process.argv[3]) || 16;
