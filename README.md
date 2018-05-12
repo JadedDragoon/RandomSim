@@ -2,6 +2,8 @@ A simple project to simulate random wins in a game over large numbers of iterati
 
 ## Installation:
 
+Node.js 8.11.1 or newer is required to run RandomSim. You may download it from the [Node.js site](https://nodejs.org/en/download/) or install it via package manager. Once installed run `node --version` from a command prompt/terminal to ensure your installed version is recent enough.
+
 First, download and extract [the latest release](https://github.com/JadedDragoon/RandomSim/releases) into it's own folder. Windows users should download the "zip" version.
 
 Then, at a command prompt/terminal, change to the folder you extracted RandomSim into and run `bash npm install -P`. This will download and install all required dependencies. On linux/bsd you will also have to `chmod +x randsim.sh` to make the start script executable.
