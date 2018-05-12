@@ -2,15 +2,9 @@ A simple project to simulate random wins in a game over large numbers of iterati
 
 ## Installation:
 
-First, [download and extract](https://github.com/JadedDragoon/RandomSim/releases) the latest release into it's own folder. Windows users should download the "zip" version.
+First, download and extract [the latest release](https://github.com/JadedDragoon/RandomSim/releases) into it's own folder. Windows users should download the "zip" version.
 
-Then, at a command prompt/terminal, change to the folder you extracted it into and run:
-```bash
-npm install -P
-```
-This will download and install all required dependencies.
-
-On linux you may also have to `chmod +x randsim.sh` to make the start script executable.
+Then, at a command prompt/terminal, change to the folder you extracted RandomSim into and run `bash npm install -P`. This will download and install all required dependencies. On linux/bsd you will also have to `chmod +x randsim.sh` to make the start script executable.
 
 ## Usage:
 ```
