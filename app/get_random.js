@@ -25,18 +25,25 @@ function getField({size = 1024, wins = 1} = {}) {
         .then((dataArr) => {
             
             // gather statistic on random numbers produced
-            dataArr = _.sortBy(dataArr);
             let counts = _.countBy(dataArr);
-            let unused = [];
-            for (let i = 1; i <= size; i++) { if (!_.includes(dataArr, i)) unused.push(i); }
-
+            
             // map all duplicate random numbers to unused numbers between 1 and size
-            return _.map(dataArr, (value) => {
+            return _.map(dataArr, (value, index, array) => {
                 let newVal;
 
                 if (counts[value] > 1) {
+                    let unused;
+                    for (let i = (value + 1); i <= (size + 1); i++) {
+                        if (i > size) { i = 1; }
+                        if (_.isUndefined(counts[i])) { 
+                            unused = i;
+                            break;
+                        }
+                    }
+
+                    newVal = unused;
+                    counts[newVal] = 1;
                     counts[value]--;
-                    newVal = unused.shift();
                 } else {
                     newVal = value;
                 }
