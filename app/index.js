@@ -85,12 +85,10 @@ if (!_.isInteger(numChunks)) {
                 field: getField({size: fieldSize, wins: winCount})
             });
             
-            sql +=
-                ' (' +
-                '"' + _.toString(result[0]) + '", ' +
-                '"' + _.join(    result[1]) + '", ' +
-                '"' + _.toString(result[2]) + '"'   +
-                '),';
+            sql += ' ("' +
+                _.toString(result[0]) + '", "' +
+                _.join(    result[1]) + '", "' +
+                _.toString(result[2]) + '"),';
         }
         
         // remove trailing comma from sql statement
@@ -116,7 +114,6 @@ if (!_.isInteger(numChunks)) {
         ]});
     });*/
 
-    debugger;
     console.log(
         '\n' +
         /*'===============================================================================\n' +
