@@ -78,7 +78,6 @@ if (!_.isInteger(numChunks)) {
             + ' - ' + _.round(process.memoryUsage().heapTotal / 1024 / 1024, 0) + ':' + _.round(process.memoryUsage().heapUsed / 1024 / 1024, 0)
         );
 
-        let resultArr;
         // sim loop, each simulation is a new itteration of this loop
         for (let si = 1; si <= chunkSize; si++) {
             let result = await getResult({

@@ -21,7 +21,7 @@ function getField({size = 1024, wins = 1} = {}) {
     while (arrOut.length < wins) {
         arrOut.push(randNum(1, size));
     }
-    return Promise.all(_.slice(arrOut))
+    return Promise.all(arrOut)
         .then((dataArr) => {
             
             // gather statistic on random numbers produced
@@ -62,15 +62,15 @@ function getResult({max = 1024, field} = {}) {
     const result = randNum(1, max);
     const outcome = result.then((resData) => {
         return field.then((fieldData) => {
-            return _.includes(_.slice(fieldData), resData);
+            return _.includes(fieldData, resData);
         });
     });
 
-    return Promise.all(_.slice([
+    return Promise.all([
         outcome,
         field,
         result
-    ]));
+    ]);
 }
 
 /**
