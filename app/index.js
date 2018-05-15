@@ -43,7 +43,6 @@ if (!_.isInteger(numChunks)) {
     );
 
     console.log(
-        '\n' +
         '===============================================================================\n' +
         '|                                Processing...                                |\n' +
         '===============================================================================\n'
@@ -124,7 +123,7 @@ if (!_.isInteger(numChunks)) {
         '|                            Statistics & Results                             |\n' +
         '===============================================================================\n\n' +
         '  Requested Iterations: ' + iterations + '\n' +
-        //'  Actual Iterations:    ' + ((!_.isUndefined(actIter)) ? actIter : 'Disabled: Debug Only') + '\n' +
+        '  Actual Iterations:    ' + ((!_.isUndefined(actIter)) ? actIter : 'Disabled: Debug Only') + '\n' +
         '  Chance Per Iteration: ' + winCount + '-in-' + fieldSize + '\n' +
         '  Expected Wins:       ~' + ((iterations * winCount) / fieldSize) + '\n' +
         '  Actual Wins:          ' + actWins + '\n\n'
