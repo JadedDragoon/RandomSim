@@ -62,7 +62,7 @@ typings/
 
 # custom
 database.sqlite
-.vscode/settings.json
+database.sqlite-journal
 node_perfctr_provider.man
 node_etw_provider.man
 LICENSE-RandomSim
