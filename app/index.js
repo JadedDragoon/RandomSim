@@ -24,7 +24,7 @@ if (!_.isInteger(numChunks)) {
     console.log(
         '\n' +
         'Creating clean database. Please wait...\n'
-    )
+    );
 
     // create new, empty database
     const db = new sqlite('./database.sqlite');
