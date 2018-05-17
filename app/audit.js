@@ -13,6 +13,10 @@ if (!fs.existsSync(outpPath)) {
     throw new Error('Path "' + outpPath + '" does not exist.');
 }
 
+// create sql iterator object to let us return the database content row-by-row
+const db = new Sqlite("./database.sqlite", { readonly: true, fileMustExist: true });
+const sqlIterator = db.prepare('SELECT * FROM main').iterate();
+
 const outpStream = fs.createWriteStream(outpFile);
 
 
