@@ -3,6 +3,14 @@ const _       = require('lodash');
 const randNum = require('random-number-csprng');
 
 /**
+ * @module 'Get Random'
+ */
+module.exports = {
+    getField,
+    getResult
+}
+
+/**
  * @description Generates a field of 'wins' randomly assigned winning integer
  * results with no result smaller than 1 or larger than 'size' and with no
  * repeating results.
@@ -78,14 +86,6 @@ function getResult({max = 1024, field} = {}) {
         field,
         result
     ]);
-}
-
-/**
- * @module 'Get Random'
- */
-module.exports = {
-    getField,
-    getResult
 }
 
 /**
