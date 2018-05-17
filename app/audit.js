@@ -17,8 +17,11 @@ if (!fs.existsSync(outpPath)) {
 const db = new Sqlite("./database.sqlite", { readonly: true, fileMustExist: true });
 const sqlIterator = db.prepare('SELECT * FROM main').iterate();
 
+// create output stream and necisary listeners.
 const outpStream = fs.createWriteStream(outpFile);
+outpStream.once('open', outpWrite);
+outpStream.on('drain', outpWrite);
 
-
-
-outpStream.write(data);
+function outpWrite() {
+    outpStream.write(data);
+}
