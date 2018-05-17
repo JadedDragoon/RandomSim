@@ -1,7 +1,7 @@
 'use strict';
 const _      = require('lodash');
 const fs     = require('fs');
-const sqlite = require('better-sqlite3');
+const Sqlite = require('better-sqlite3');
 
 const outpFile = _.toString(process.argv[2]);
 const outpPath = /$.*\//.exec(outpFile);

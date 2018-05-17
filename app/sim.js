@@ -1,7 +1,7 @@
 'use strict';
 const _      = require('lodash');
 const moment = require('moment');
-const sqlite = require('better-sqlite3');
+const Sqlite = require('better-sqlite3');
 const { chunkLoop } = require('./sim_loops.js');
 
 const fieldSize  = _.toSafeInteger(process.argv[3]) || 1024;
@@ -27,7 +27,7 @@ if (!_.isInteger(numChunks)) {
     );
 
     // create new, empty database
-    const db = new sqlite('./database.sqlite');
+    const db = new Sqlite('./database.Sqlite');
     db.prepare('DROP TABLE IF EXISTS main').run();
     db.prepare('VACUUM').run();
     db.prepare('CREATE TABLE main (outcome BOOLEAN, field TEXT, result INTEGER)').run();
