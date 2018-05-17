@@ -4,10 +4,10 @@ const moment = require('moment');
 const sqlite = require('better-sqlite3');
 const { getField, getResult } = require('./get_random.js');
 
-const fieldSize  = _.toSafeInteger(process.argv[2]) || 1024;
-const winCount   = _.toSafeInteger(process.argv[3]) || 16;
-const iterations = _.toSafeInteger(process.argv[4]) || 102400;
-const chunkSize  = _.toSafeInteger(process.argv[5]) || 1024;
+const fieldSize  = _.toSafeInteger(process.argv[3]) || 1024;
+const winCount   = _.toSafeInteger(process.argv[4]) || 16;
+const iterations = _.toSafeInteger(process.argv[5]) || 102400;
+const chunkSize  = _.toSafeInteger(process.argv[6]) || 1024;
 const numChunks  = (iterations / chunkSize);
 const startTime  = moment();
 
