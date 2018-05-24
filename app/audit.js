@@ -3,10 +3,10 @@ const _      = require('lodash');
 const fs     = require('fs');
 const Sqlite = require('better-sqlite3');
 
-const outpFile = _.toString(process.argv[2]);
-const outpPath = /$.*\//.exec(outpFile);
+const outpFile = _.toString(process.argv[3]);
+const outpPath = /.*\//.exec(outpFile)[0];
 
-if (!_.isEmpty(outpFile)) {
+if (_.isEmpty(outpFile)) {
     throw new TypeError('You must specify the file to output raw data to.');
 }
 if (!fs.existsSync(outpPath)) {

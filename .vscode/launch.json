@@ -19,9 +19,20 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Launch Program - Audit",
+            "program": "${workspaceFolder}\\index.js",
+            "args": [
+                "--audit",
+                "./debug-audit.log"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program - Long Run",
             "program": "${workspaceFolder}\\index.js",
             "args": [
+                "--sim",
                 "1024",
                 "1",
                 "102400000000",
